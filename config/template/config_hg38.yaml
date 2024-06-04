@@ -1,0 +1,62 @@
+star:
+    genome: /project/RDS-SMS-GDT-RW/data/hg38_ref/Homo_sapiens_assembly38.fasta
+    index: /project/RDS-SMS-GDT-RW/data/hg38_ref/star_index_gencode38
+    gtf: /project/RDS-SMS-GDT-RW/data/hg38_ref/gencode.v38.annotation.gtf
+    sjdbOverhang: 150
+
+data:
+    fastq: /scratch/RDS-SMS-GDT-RW/alignment_data/fastq/pe/raw
+    trimmed: /scratch/RDS-SMS-GDT-RW/alignment_data/fastq/pe/trimmed
+
+region_of_interest:
+
+config:
+    star:
+        default:
+            - "--outSAMtype BAM Unsorted"
+            - "--outSAMattributes NH HI AS NM MD"
+            - "--outFilterMultimapNmax 20"
+            - "--alignSJoverhangMin 5"
+            - "--alignSJDBoverhangMin 1"
+            - "--outFilterMismatchNmax 10"      
+            - "--outFilterMismatchNoverLmax 0.3"
+            - "--alignIntronMin 21"
+            - "--alignIntronMax 1000000"
+            - "--alignMatesGapMax 0"
+            - "--outFilterType BySJout"
+            - "--outFilterScoreMinOverLread 0.66"
+            - "--outFilterMatchNminOverLread 0.66"
+            - "--outSAMstrandField intronMotif"
+            - "--outFilterIntronMotifs None"
+            - "--alignSoftClipAtReferenceEnds Yes"
+            - "--quantMode GeneCounts"
+            - "--outSAMunmapped Within"
+            - "--chimSegmentMin 12"
+            - "--chimJunctionOverhangMin 12"
+            - "--chimOutType WithinBAM"
+            - "--chimMainSegmentMultNmax 10"
+            - "--outSJfilterCountUniqueMin 3 1 1 1"
+        var1_6bp:
+            - "--outSAMtype BAM Unsorted"
+            - "--outSAMattributes NH HI AS NM MD"
+            - "--outFilterMultimapNmax 20"
+            - "--alignSJoverhangMin 6"
+            - "--alignSJDBoverhangMin 6"
+            - "--outFilterMismatchNmax 10"      
+            - "--outFilterMismatchNoverLmax 0.3"
+            - "--alignIntronMin 21"
+            - "--alignIntronMax 1000000"
+            - "--alignMatesGapMax 0"
+            - "--outFilterType BySJout"
+            - "--outFilterScoreMinOverLread 0.66"
+            - "--outFilterMatchNminOverLread 0.66"
+            - "--outSAMstrandField intronMotif"
+            - "--outFilterIntronMotifs None"
+            - "--alignSoftClipAtReferenceEnds Yes"
+            - "--quantMode GeneCounts"
+            - "--outSAMunmapped Within"
+            - "--chimSegmentMin 12"
+            - "--chimJunctionOverhangMin 12"
+            - "--chimOutType WithinBAM"
+            - "--chimMainSegmentMultNmax 10"
+            - "--outSJfilterCountUniqueMin 3 1 1 1"

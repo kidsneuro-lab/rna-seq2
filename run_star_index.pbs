@@ -1,0 +1,16 @@
+#PBS -P RDS-SMS-GDT-RW
+#PBS -l select=1:ncpus=1:mem=1GB
+#PBS -l walltime=8:00:00
+#PBS -M yourid@youremail.com
+#PBS -m ae
+#PBS -o logs/index/workflow.log
+#PBS -e logs/index/workflow.error
+
+cd $PBS_O_WORKDIR
+
+umask 002
+
+module load python/3.10.11
+module load star/2.7.8a
+
+snakemake -s workflow/rules/Snakefile_index.smk --nolock --cores 1 -d . all

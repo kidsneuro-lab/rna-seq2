@@ -1,0 +1,7 @@
+.snakemake/
+**/venv*
+*.log
+Log.out
+logs
+results/*
+**/.DS_Store
