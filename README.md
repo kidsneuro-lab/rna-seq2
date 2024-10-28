@@ -65,53 +65,66 @@ qsub `run_pe_align.pbs`
 
 # Configuration guide
 ## `config/config.yaml`
+Please refer to [this wiki page](https://github.com/kidsneuro-lab/rna-seq2/wiki/RNASeq-workflow-configuration) for further information on how to configure the pipeline.
+
 ```yaml
-star:
-    genome: /<location>/Homo_sapiens_assembly38.fasta
-    index: /<location>/star_index_gencode38
-    gtf: /<location>/gencode.v38.annotation.gtf
-    sjdbOverhang: 150
+"config":
+  "star":
+    "alignment":
+      "default":
+        - "--outSAMtype BAM Unsorted"
+        - "--outSAMattributes NH HI AS NM MD"
+        - "--outFilterMultimapNmax 20"
+        - "--alignSJoverhangMin 6"
+        - "--alignSJDBoverhangMin 6"
+        - "--outFilterMismatchNmax 10"      
+        - "--outFilterMismatchNoverLmax 0.3"
+        - "--alignIntronMin 21"
+        - "--alignIntronMax 1000000"
+        - "--alignMatesGapMax 0"
+        - "--outFilterType BySJout"
+        - "--outFilterScoreMinOverLread 0.66"
+        - "--outFilterMatchNminOverLread 0.66"
+        - "--outSAMstrandField intronMotif"
+        - "--outFilterIntronMotifs None"
+        - "--alignSoftClipAtReferenceEnds Yes"
+        - "--quantMode GeneCounts"
+        - "--outSAMunmapped Within"
+        - "--chimSegmentMin 12"
+        - "--chimJunctionOverhangMin 12"
+        - "--chimOutType WithinBAM"
+        - "--chimMainSegmentMultNmax 10"
+        - "--outSJfilterCountUniqueMin 3 1 1 1"
+    "genomes":
+      "hg38_ref":
+        "data": "/project/RDS-SMS-GDT-RW/data/hg38_ref"
+        "fasta": "Homo_sapiens_assembly38.fasta"
+        "gtf": "gencode.v38.annotation.gtf"
+        "sjdbOverhang": "150"
 
-data:
-    fastq: /<location>/raw
-    trimmed: /<location>/trimmed
+"data":
+  "fastq": "/fastq/raw"
+  "trimmed": "/fastq/trimmed"
 
-region_of_interest: # This is for creation of the subset BAM file only containing your region of interest
-    - "chr1:8,557,893-8,561,603" # chr1:8,350,404-8,819,640
+"region_of_interest":
+  - "''chr1:151401724-151460494''"
+  - "''chr1:173823653-173859808''"
 
-samples:
-     "SAMPLE":
-         "reads":
-             "r1": "SAMPLE_R1.fastq.gz"
-             "r2": "SAMPLE_R2.fastq.gz"
-         "variations":
-             "default":
-                 - "default"
-
-config:
-    star:
-        default:
-            - "--outSAMtype BAM Unsorted"
-            - "--outSAMattributes NH HI AS NM MD"
-            - "--outFilterMultimapNmax 20"
-            - "--alignSJoverhangMin 6"
-            - "--alignSJDBoverhangMin 6"
-            - "--outFilterMismatchNmax 10"      
-            - "--outFilterMismatchNoverLmax 0.3"
-            - "--alignIntronMin 21"
-            - "--alignIntronMax 1000000"
-            - "--alignMatesGapMax 0"
-            - "--outFilterType BySJout"
-            - "--outFilterScoreMinOverLread 0.66"
-            - "--outFilterMatchNminOverLread 0.66"
-            - "--outSAMstrandField intronMotif"
-            - "--outFilterIntronMotifs None"
-            - "--alignSoftClipAtReferenceEnds Yes"
-            - "--quantMode GeneCounts"
-            - "--outSAMunmapped Within"
-            - "--chimSegmentMin 12"
-            - "--chimJunctionOverhangMin 12"
-            - "--chimOutType WithinBAM"
-            - "--chimMainSegmentMultNmax 10"
-            - "--outSJfilterCountUniqueMin 3 1 1 1"
+"samples":
+  "SAMPLE1":
+    "genome": "hg38_ref"
+    "reads":
+      "r1": "SAMPLE1_R1.fastq.gz"
+      "r2": "SAMPLE1_R2.fastq.gz"
+    "variations":
+      "default":
+      - "default"
+  "SAMPLE2":
+    "genome": "hg38_ref"
+    "reads":
+      "r1": "SAMPLE2_R1.fastq.gz"
+      "r2": "SAMPLE2_R2.fastq.gz"
+    "variations":
+      "default":
+      - "default"
 ```
